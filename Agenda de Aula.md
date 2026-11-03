@@ -162,7 +162,7 @@ A disciplina será avaliada por meio dos seguintes instrumentos:
 
 ---
 
-## 🛠️ Semana 14 — Atividade Prática
+## 🛠️ Semana 14 
 
 ### 📅 02/11 (Segunda)
 - 🇧🇷 **Feriado Nacional — Finados**
@@ -170,25 +170,25 @@ A disciplina será avaliada por meio dos seguintes instrumentos:
 
 ---
 
-## 📌 Semana 15
+## 📌 Semana 15 — Atividade Prática
 
 ### 📅 09/11 (Segunda)
+- 🛠️ **Atividade Prática 4**
+
+---
+
+## 🛠️ Semana 16 
+
+### 📅 16/11 (Segunda)
 - Consultas orientadas à análise
 - Boas práticas para consultas complexas
 
 ---
 
-## 🛠️ Semana 16 — Atividade Prática
-
-### 📅 16/11 (Segunda)
-- 🛠️ **Atividade Prática 5**
-
----
-
-## 📌 Semana 17
+## 📌 Semana 17 — Atividade Prática
 
 ### 📅 23/11 (Segunda)
-- Revisão Geral
+- 🛠️ **Atividade Prática 5**
 - Preparação para a Avaliação 2
 
 ---
@@ -229,8 +229,8 @@ A disciplina será avaliada por meio dos seguintes instrumentos:
 | 12/10 | 🇧🇷 Feriado Nacional — Nossa Senhora Aparecida |
 | 19/10 | 🏛️ Feriado Municipal — Aniversário de Pouso Alegre |
 | 02/11 | 🇧🇷 Feriado Nacional — Finados |
-| 02/11 | 🛠️ **Atividade Prática 4** *(reprogramada)* |
-| 16/11 | 🛠️ **Atividade Prática 5** |
+| 09/11 | 🛠️ **Atividade Prática 4** |
+| 23/11 | 🛠️ **Atividade Prática 5** |
 | 30/11 | 📝 **Avaliação 2** |
 | 07/12 | 📝 **2ª Chamada / Avaliação Especial** |
 | 14/12 | 🎓 Encerramento da disciplina |
