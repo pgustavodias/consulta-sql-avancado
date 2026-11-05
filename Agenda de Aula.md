@@ -166,8 +166,7 @@ A disciplina será avaliada por meio dos seguintes instrumentos:
 
 ### 📅 02/11 (Segunda)
 - 🇧🇷 **Feriado Nacional — Finados**
-- 🛠️ **Atividade Prática 4**
-
+  
 ---
 
 ## 📌 Semana 15 — Atividade Prática
