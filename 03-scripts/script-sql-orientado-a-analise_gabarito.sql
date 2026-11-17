@@ -29,15 +29,6 @@ CREATE TABLE compra (
 
     CONSTRAINT fk_compra_empresa
         FOREIGN KEY (id_empresa) REFERENCES empresa(id),
-
-    CONSTRAINT chk_compra_quantidade
-        CHECK (quantidade > 0),
-
-    CONSTRAINT chk_compra_valor
-        CHECK (valor_unitario >= 0),
-
-    CONSTRAINT chk_compra_status
-        CHECK (status IN ('Concluída', 'Pendente', 'Cancelada'))
 );
 
 -- Conferência da estrutura
@@ -57,24 +48,17 @@ INSERT INTO empresa (id, nome) VALUES
 INSERT INTO compra
 (nf, id_produto, id_empresa, data_compra, quantidade, valor_unitario, status)
 VALUES
--- Empresa 1
 (1001, 1, 1, '2026-09-02', 2, 150.00, 'Concluída'),
 (1001, 2, 1, '2026-09-02', 1,  80.00, 'Concluída'),
 (1002, 1, 1, '2026-09-08', 3, 150.00, 'Concluída'),
 (1003, 3, 1, '2026-09-15', 2, 300.00, 'Pendente'),
 (1004, 4, 1, '2026-10-03', 1, 500.00, 'Cancelada'),
-
--- Empresa 2
 (2001, 2, 2, '2026-09-04', 5,  80.00, 'Concluída'),
 (2001, 3, 2, '2026-09-04', 1, 300.00, 'Concluída'),
 (2002, 4, 2, '2026-09-12', 2, 500.00, 'Concluída'),
 (2003, 1, 2, '2026-10-05', 1, 150.00, 'Pendente'),
-
--- Empresa 3
 (3001, 3, 3, '2026-09-10', 4, 300.00, 'Concluída'),
 (3002, 4, 3, '2026-10-08', 1, 500.00, 'Concluída'),
-
--- Compra sem empresa identificada (para exercitar LEFT JOIN e COALESCE)
 (9001, 5, NULL, '2026-10-10', 2, 120.00, 'Pendente');
 
 
@@ -191,7 +175,6 @@ SELECT
     quantidade,
     valor_unitario,
     quantidade * valor_unitario AS valor_total,
-
     CASE
         WHEN quantidade * valor_unitario >= 800
             THEN 'Alto valor'
@@ -199,7 +182,6 @@ SELECT
             THEN 'Médio valor'
         ELSE 'Baixo valor'
     END AS classificacao
-
 FROM compra
 ORDER BY valor_total DESC;
 
@@ -240,22 +222,17 @@ SELECT
     e.id,
     e.nome AS empresa,
     COUNT(c.id_compra) AS quantidade_itens,
-
     COALESCE(
         SUM(c.quantidade * c.valor_unitario),
         0
     ) AS valor_total
-
 FROM empresa e
-
 LEFT JOIN compra c
     ON c.id_empresa = e.id
     AND c.status = 'Concluída'
-
 GROUP BY
     e.id,
     e.nome
-
 ORDER BY valor_total DESC;
 
 
@@ -272,20 +249,14 @@ CONTEÚDOS: JOIN, SUM, WHERE, GROUP BY e HAVING.
 SELECT
     e.nome AS empresa,
     SUM(c.quantidade * c.valor_unitario) AS faturamento
-
 FROM empresa e
-
 INNER JOIN compra c
     ON c.id_empresa = e.id
-
 WHERE c.status = 'Concluída'
-
 GROUP BY
     e.id,
     e.nome
-
 HAVING SUM(c.quantidade * c.valor_unitario) > 500
-
 ORDER BY faturamento DESC;
 
 
@@ -307,7 +278,6 @@ WITH total_por_produto AS (
     WHERE status = 'Concluída'
     GROUP BY id_produto
 )
-
 SELECT
     id_produto,
     valor_total
@@ -339,36 +309,27 @@ CONTEÚDOS: JOIN, COUNT DISTINCT, SUM, COALESCE, CASE e GROUP BY.
 SELECT
     e.id,
     e.nome AS empresa,
-
     COUNT(DISTINCT c.nf) AS quantidade_notas,
-
     COALESCE(
         SUM(c.quantidade * c.valor_unitario),
         0
     ) AS valor_total,
-
     CASE
         WHEN COALESCE(
             SUM(c.quantidade * c.valor_unitario), 0
         ) >= 1500 THEN 'Grande volume'
-
         WHEN COALESCE(
             SUM(c.quantidade * c.valor_unitario), 0
         ) >= 500 THEN 'Médio volume'
-
         ELSE 'Pequeno volume'
     END AS classificacao
-
 FROM empresa e
-
 LEFT JOIN compra c
     ON c.id_empresa = e.id
     AND c.status = 'Concluída'
-
 GROUP BY
     e.id,
     e.nome
-
 ORDER BY valor_total DESC;
 
 
@@ -391,24 +352,18 @@ CREATE OR REPLACE VIEW vw_resumo_compras_empresa AS
 SELECT
     e.id AS id_empresa,
     e.nome AS empresa,
-
     COUNT(DISTINCT c.nf) AS quantidade_notas,
-
     COALESCE(
         SUM(c.quantidade * c.valor_unitario),
         0
     ) AS valor_total
-
 FROM empresa e
-
 LEFT JOIN compra c
     ON c.id_empresa = e.id
     AND c.status = 'Concluída'
-
 GROUP BY
     e.id,
     e.nome;
-
 
 -- Consulta da VIEW
 SELECT
@@ -438,22 +393,15 @@ RESOLUÇÃO:
 SELECT
     e.id AS id_empresa,
     e.nome AS empresa,
-
     COUNT(DISTINCT c.nf) AS quantidade_notas,
-
     SUM(c.quantidade * c.valor_unitario) AS valor_total
-
 FROM empresa e
-
 INNER JOIN compra c
     ON c.id_empresa = e.id
-
 WHERE c.status = 'Concluída'
-
 GROUP BY
     e.id,
     e.nome
-
 ORDER BY valor_total DESC;
 
 
