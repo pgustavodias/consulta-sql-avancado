@@ -26,18 +26,8 @@ CREATE TABLE compra (
     quantidade INT NOT NULL,
     valor_unitario DECIMAL(10,2) NOT NULL,
     status VARCHAR(20) NOT NULL,
-
     CONSTRAINT fk_compra_empresa
-        FOREIGN KEY (id_empresa) REFERENCES empresa(id),
-
-    CONSTRAINT chk_compra_quantidade
-        CHECK (quantidade > 0),
-
-    CONSTRAINT chk_compra_valor
-        CHECK (valor_unitario >= 0),
-
-    CONSTRAINT chk_compra_status
-        CHECK (status IN ('Concluída', 'Pendente', 'Cancelada'))
+        FOREIGN KEY (id_empresa) REFERENCES empresa(id)
 );
 
 -- Conferência da estrutura
@@ -57,25 +47,19 @@ INSERT INTO empresa (id, nome) VALUES
 INSERT INTO compra
 (nf, id_produto, id_empresa, data_compra, quantidade, valor_unitario, status)
 VALUES
--- Empresa 1
 (1001, 1, 1, '2026-09-02', 2, 150.00, 'Concluída'),
 (1001, 2, 1, '2026-09-02', 1,  80.00, 'Concluída'),
 (1002, 1, 1, '2026-09-08', 3, 150.00, 'Concluída'),
 (1003, 3, 1, '2026-09-15', 2, 300.00, 'Pendente'),
 (1004, 4, 1, '2026-10-03', 1, 500.00, 'Cancelada'),
-
--- Empresa 2
 (2001, 2, 2, '2026-09-04', 5,  80.00, 'Concluída'),
 (2001, 3, 2, '2026-09-04', 1, 300.00, 'Concluída'),
 (2002, 4, 2, '2026-09-12', 2, 500.00, 'Concluída'),
 (2003, 1, 2, '2026-10-05', 1, 150.00, 'Pendente'),
-
--- Empresa 3
 (3001, 3, 3, '2026-09-10', 4, 300.00, 'Concluída'),
 (3002, 4, 3, '2026-10-08', 1, 500.00, 'Concluída'),
-
--- Compra sem empresa identificada (para exercitar LEFT JOIN e COALESCE)
 (9001, 5, NULL, '2026-10-10', 2, 120.00, 'Pendente');
+
 
 
 -- ============================================================================
